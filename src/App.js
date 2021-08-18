@@ -1,25 +1,14 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import CityWeather from "./layout/CityWeather";
 
 function App() {
 	const [city, setCity] = useState("");
 	const [inputError, setInputError] = useState(false);
-	const [isFetch, setFetch] = useState(false);
-	const [apiData, setApiData] = useState("");
+	let [isFetch, setFetch] = useState(false);
+	const [weather, setWeather] = useState(false);
 	const APIkey = "67fccf071e4c18dd1da570918ad48e4a";
 	const api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}`;
-
-	useEffect(() => {
-		if (isFetch && city) {
-			fetch(api)
-				.then((response) => response.json())
-				.then((data) => {
-					setApiData(data);
-					setFetch(false);
-				})
-				.catch((error) => console.log(error));
-		}
-	}, [apiData, isFetch, city, api]);
 
 	const handleFetchClick = () => {
 		setInputError(false);
@@ -29,13 +18,24 @@ function App() {
 			setInputError(inputError);
 		}
 
-		const ifFetch = !isFetch;
-		setFetch(ifFetch);
+		isFetch = true;
+		setFetch(isFetch);
+
+		if (isFetch && city) {
+			fetch(api)
+				.then((response) => response.json())
+				.then((data) => {
+					setWeather(data);
+					setFetch(false);
+				})
+				.catch((error) => console.log(error));
+		}
+
+		setFetch(false);
 	};
 
 	const handleInputChange = (e) => {
-		const inputValue = e.target.value;
-		setCity(inputValue);
+		setCity(e.target.value);
 	};
 
 	return (
@@ -48,7 +48,11 @@ function App() {
 			/>
 			{inputError ? <p>Enter city name</p> : null}
 			<button onClick={handleFetchClick}>Klik</button>
-			<p>{apiData.name}</p>
+			{typeof weather.main != "undefined" ? (
+				<CityWeather weather={weather} />
+			) : (
+				" "
+			)}
 		</div>
 	);
 }
