@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 
 function App() {
 	const [city, setCity] = useState("");
+	const [inputError, setInputError] = useState(false);
 	const [isFetch, setFetch] = useState(false);
 	const [apiData, setApiData] = useState("");
 	const APIkey = "67fccf071e4c18dd1da570918ad48e4a";
-	// const city = "Sopot";
 	const api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}`;
 
 	useEffect(() => {
@@ -22,6 +22,13 @@ function App() {
 	}, [apiData, isFetch, city, api]);
 
 	const handleFetchClick = () => {
+		setInputError(false);
+
+		if (city.length === 0) {
+			const inputError = true;
+			setInputError(inputError);
+		}
+
 		const ifFetch = !isFetch;
 		setFetch(ifFetch);
 	};
@@ -39,6 +46,7 @@ function App() {
 				onChange={handleInputChange}
 				value={city}
 			/>
+			{inputError ? <p>Enter city name</p> : null}
 			<button onClick={handleFetchClick}>Klik</button>
 			<p>{apiData.name}</p>
 		</div>
