@@ -8,11 +8,16 @@ function App() {
 	const [inputErrorMessage, setInputErrorMessage] = useState("");
 	let [isFetch, setFetch] = useState(false);
 	const [weather, setWeather] = useState(false);
+	const [forecast, setForecast] = useState(false);
 	const APIkey = "67fccf071e4c18dd1da570918ad48e4a";
-	const api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}`;
+	const currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}`;
+	const forecastWeather = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIkey}`;
 
 	const handleFetchClick = () => {
 		setInputError(false);
+
+		isFetch = true;
+		setFetch(isFetch);
 
 		if (city.length === 0) {
 			const inputError = true;
@@ -20,26 +25,32 @@ function App() {
 			setInputErrorMessage("Enter city name");
 		}
 
-		if (city.length !== 0 && typeof weather.main == "undefined") {
-			const inputError = true;
-			setInputError(inputError);
-			setInputErrorMessage("Enter correct city name");
-		}
-
-		isFetch = true;
-		setFetch(isFetch);
-
 		if (isFetch && city) {
-			fetch(api)
+			fetch(currentWeather)
 				.then((response) => response.json())
 				.then((data) => {
 					setWeather(data);
 					setFetch(false);
+					handleWrongCityNameInputError(city, data);
+				})
+				.catch((error) => console.log(error));
+
+			fetch(forecastWeather)
+				.then((response) => response.json())
+				.then((data) => {
+					setForecast(data);
+					setFetch(false);
 				})
 				.catch((error) => console.log(error));
 		}
+	};
 
-		setFetch(false);
+	const handleWrongCityNameInputError = (city, data) => {
+		if (city.length !== 0 && typeof data.main == "undefined") {
+			const inputError = true;
+			setInputError(inputError);
+			setInputErrorMessage("Enter correct city name");
+		}
 	};
 
 	const handleInputChange = (e) => {
