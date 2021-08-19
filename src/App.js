@@ -5,6 +5,7 @@ import CityWeather from "./layout/CityWeather";
 function App() {
 	const [city, setCity] = useState("");
 	const [inputError, setInputError] = useState(false);
+	const [inputErrorMessage, setInputErrorMessage] = useState("");
 	let [isFetch, setFetch] = useState(false);
 	const [weather, setWeather] = useState(false);
 	const APIkey = "67fccf071e4c18dd1da570918ad48e4a";
@@ -16,6 +17,13 @@ function App() {
 		if (city.length === 0) {
 			const inputError = true;
 			setInputError(inputError);
+			setInputErrorMessage("Enter city name");
+		}
+
+		if (city.length !== 0 && typeof weather.main == "undefined") {
+			const inputError = true;
+			setInputError(inputError);
+			setInputErrorMessage("Enter correct city name");
 		}
 
 		isFetch = true;
@@ -46,7 +54,7 @@ function App() {
 				onChange={handleInputChange}
 				value={city}
 			/>
-			{inputError ? <p>Enter city name</p> : null}
+			{inputError ? <p>{inputErrorMessage}</p> : null}
 			<button onClick={handleFetchClick}>Klik</button>
 			{typeof weather.main != "undefined" ? (
 				<CityWeather weather={weather} />
