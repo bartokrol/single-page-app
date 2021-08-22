@@ -10,7 +10,7 @@ function App() {
 	const [weather, setWeather] = useState(false);
 	const [forecast, setForecast] = useState(false);
 	const APIkey = "67fccf071e4c18dd1da570918ad48e4a";
-	const currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}`;
+	const currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIkey}`;
 	const forecastWeather = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIkey}`;
 
 	const handleFetchClick = () => {
@@ -53,6 +53,22 @@ function App() {
 		}
 	};
 
+	const showForecast = () => {
+		const dates = [];
+		forecast.list.forEach((el) => {
+			const day = el.dt_txt.slice(0, 10);
+			const numberOfDates = dates.length - 1;
+			const lastDate = dates[numberOfDates];
+
+			if (dates.length === 0) {
+				dates.push(day);
+			}
+
+			if (day !== lastDate && lastDate !== undefined) {
+				dates.push(day);
+			}
+		});
+	};
 	const handleInputChange = (e) => {
 		setCity(e.target.value);
 	};
@@ -68,7 +84,13 @@ function App() {
 			{inputError ? <p>{inputErrorMessage}</p> : null}
 			<button onClick={handleFetchClick}>Klik</button>
 			{typeof weather.main != "undefined" ? (
-				<CityWeather weather={weather} />
+				<div>
+					<ul>
+						<li>Current Weather</li>
+						<li onClick={showForecast}>Hourly Forecast</li>
+					</ul>
+					<CityWeather weather={weather} />
+				</div>
 			) : (
 				" "
 			)}
