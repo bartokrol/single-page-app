@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import CityWeather from "./layout/CityWeather";
 // import CityForecast from "./layout/CityForecast";
 import ForecastNav from "./layout/ForecastNav";
@@ -78,28 +79,32 @@ function App() {
 	};
 
 	return (
-		<div className="App">
-			<input
-				type="text"
-				placeholder="Enter city name..."
-				onChange={handleInputChange}
-				value={city}
-				className="App__searchInput"
-			/>
-			{inputError ? <p>{inputErrorMessage}</p> : null}
-			<button className="App__fetchBtn" onClick={handleFetchClick}>
-				Klik
-			</button>
-			{typeof weather.main != "undefined" ? (
-				<div classame="App__forecast">
-					<ForecastNav click={showForecast} />
-					<CityWeather weather={weather} />
-				</div>
-			) : (
-				" "
-			)}
-			{/* <CityForecast forecastDates={forecastDates} /> */}
-		</div>
+		<Router>
+			<div className="App">
+				<input
+					type="text"
+					placeholder="Enter city name..."
+					onChange={handleInputChange}
+					value={city}
+					className="App__searchInput"
+				/>
+				{inputError ? <p>{inputErrorMessage}</p> : null}
+				<button className="App__fetchBtn" onClick={handleFetchClick}>
+					Klik
+				</button>
+				{typeof weather.main != "undefined" ? (
+					<div classame="App__forecast">
+						<ForecastNav click={showForecast} />
+						<CityWeather weather={weather} />
+					</div>
+				) : (
+					" "
+				)}
+				{/* <CityForecast forecastDates={forecastDates} /> */}
+				<Route path="/" exact></Route>
+				<Route path="/cityForecast"></Route>
+			</div>
+		</Router>
 	);
 }
 
