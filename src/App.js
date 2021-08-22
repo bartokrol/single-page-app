@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import CityWeather from "./layout/CityWeather";
 // import CityForecast from "./layout/CityForecast";
 import ForecastNav from "./layout/ForecastNav";
+import CityForecast from "./layout/CityForecast";
 
 function App() {
 	const [city, setCity] = useState("");
@@ -95,14 +96,25 @@ function App() {
 				{typeof weather.main != "undefined" ? (
 					<div classame="App__forecast">
 						<ForecastNav click={showForecast} />
-						<CityWeather weather={weather} />
 					</div>
 				) : (
 					" "
 				)}
-				{/* <CityForecast forecastDates={forecastDates} /> */}
-				<Route path="/" exact></Route>
-				<Route path="/cityForecast"></Route>
+				<Route
+					path="/cityWeather"
+					render={(props) => (
+						<CityWeather {...props} weather={weather} />
+					)}
+				></Route>
+				<Route
+					path="/cityForecast"
+					render={(props) => (
+						<CityForecast
+							{...props}
+							forecastDates={forecastDates}
+						/>
+					)}
+				></Route>
 			</div>
 		</Router>
 	);
