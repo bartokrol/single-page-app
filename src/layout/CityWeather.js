@@ -1,11 +1,15 @@
 const CityWeather = ({ weather }) => {
 	return (
-		<div>
-			<h1>
+		<div classame="App__forecast__currentWeather">
+			<h1 classame="App__forecast__currentWeather__cityName">
 				{weather.name}, {weather.sys.country}
 			</h1>
-			<p>{weather.weather[0].main}</p>
-			<p>{weather.main.temp}</p>
+			<p classame="App__forecast__currentWeather__weather">
+				{weather.weather[0].main}
+			</p>
+			<p classame="App__forecast__currentWeather__temp">
+				{weather.main.temp}
+			</p>
 		</div>
 	);
 };

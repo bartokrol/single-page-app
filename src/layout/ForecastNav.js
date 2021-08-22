@@ -1,8 +1,10 @@
-const ForecastNav = ({click}) => {
+const ForecastNav = ({ click }) => {
 	return (
-		<ul>
-			<li>Current Weather</li>
-			<li onClick={click}>Hourly Forecast</li>
+		<ul classame="App__forecast__nav">
+			<li classame="App__forecast__nav__navItem">Current Weather</li>
+			<li classame="App__forecast__nav__navItem" onClick={click}>
+				Hourly Forecast
+			</li>
 		</ul>
 	);
 };

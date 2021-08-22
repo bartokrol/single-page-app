@@ -84,11 +84,14 @@ function App() {
 				placeholder="Enter city name..."
 				onChange={handleInputChange}
 				value={city}
+				className="App__searchInput"
 			/>
 			{inputError ? <p>{inputErrorMessage}</p> : null}
-			<button onClick={handleFetchClick}>Klik</button>
+			<button className="App__fetchBtn" onClick={handleFetchClick}>
+				Klik
+			</button>
 			{typeof weather.main != "undefined" ? (
-				<div>
+				<div classame="App__forecast">
 					<ForecastNav click={showForecast} />
 					<CityWeather weather={weather} />
 				</div>
