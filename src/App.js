@@ -1,10 +1,9 @@
 import "./App.css";
 import { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import CityWeather from "./layout/CityWeather";
-// import CityForecast from "./layout/CityForecast";
+import CurrentWeather from "./layout/CurrentWeather";
 import ForecastNav from "./layout/ForecastNav";
-import CityForecast from "./layout/CityForecast";
+import HourlyForecast from "./layout/HourlyForecast";
 
 function App() {
 	const [city, setCity] = useState("");
@@ -100,16 +99,17 @@ function App() {
 				) : (
 					" "
 				)}
+
 				<Route
-					path="/cityWeather"
+					path="/currentWeather"
 					render={(props) => (
-						<CityWeather {...props} weather={weather} />
+						<CurrentWeather {...props} weather={weather} />
 					)}
 				></Route>
 				<Route
-					path="/cityForecast"
+					path="/hourlyForecast"
 					render={(props) => (
-						<CityForecast
+						<HourlyForecast
 							{...props}
 							forecastDates={forecastDates}
 						/>
