@@ -1,6 +1,8 @@
 import "./App.css";
 import { useState } from "react";
 import CityWeather from "./layout/CityWeather";
+// import CityForecast from "./layout/CityForecast";
+import ForecastNav from "./layout/ForecastNav";
 
 function App() {
 	const [city, setCity] = useState("");
@@ -9,6 +11,7 @@ function App() {
 	let [isFetch, setFetch] = useState(false);
 	const [weather, setWeather] = useState(false);
 	const [forecast, setForecast] = useState(false);
+	const [forecastDates, setForecastDates] = useState(false);
 	const APIkey = "67fccf071e4c18dd1da570918ad48e4a";
 	const currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIkey}`;
 	const forecastWeather = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIkey}`;
@@ -68,6 +71,7 @@ function App() {
 				dates.push(day);
 			}
 		});
+		setForecastDates(dates);
 	};
 	const handleInputChange = (e) => {
 		setCity(e.target.value);
@@ -85,15 +89,13 @@ function App() {
 			<button onClick={handleFetchClick}>Klik</button>
 			{typeof weather.main != "undefined" ? (
 				<div>
-					<ul>
-						<li>Current Weather</li>
-						<li onClick={showForecast}>Hourly Forecast</li>
-					</ul>
+					<ForecastNav click={showForecast} />
 					<CityWeather weather={weather} />
 				</div>
 			) : (
 				" "
 			)}
+			{/* <CityForecast forecastDates={forecastDates} /> */}
 		</div>
 	);
 }
