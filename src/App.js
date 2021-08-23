@@ -59,10 +59,13 @@ function App() {
 
 	const showForecast = () => {
 		const dates = [];
+		const hours = [];
 		forecast.list.forEach((el) => {
 			const day = el.dt_txt.slice(0, 10);
 			const numberOfDates = dates.length - 1;
 			const lastDate = dates[numberOfDates];
+
+			const hour = el.dt_txt.slice(11);
 
 			if (dates.length === 0) {
 				dates.push(day);
@@ -70,6 +73,14 @@ function App() {
 
 			if (day !== lastDate && lastDate !== undefined) {
 				dates.push(day);
+			}
+
+			if (hours.length === 0) {
+				hours.push(hour);
+			}
+
+			if (hours.indexOf(hour) === -1) {
+				hours.push(hour);
 			}
 		});
 		setForecastDates(dates);
