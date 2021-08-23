@@ -1,6 +1,6 @@
 import { Line } from "react-chartjs-2";
 
-const HourlyForecast = ({ forecastDates, forecastHours }) => {
+const HourlyForecast = ({ forecastDates, minTemp, maxTemp }) => {
 	// const dates = forecastDates.map((forecast) => (
 	// 	<h1 key={forecast}>{forecast}</h1>
 	// ));
@@ -18,7 +18,7 @@ const HourlyForecast = ({ forecastDates, forecastHours }) => {
 					datasets: [
 						{
 							label: "# of Votes",
-							data: [12, 7, 3, 5, 2, 3],
+							data: [...minTemp],
 						},
 					],
 					backgroundColor: [
