@@ -13,6 +13,7 @@ function App() {
 	const [weather, setWeather] = useState(false);
 	const [forecast, setForecast] = useState(false);
 	const [forecastDates, setForecastDates] = useState(false);
+	const [forecastHours, setForecastHours] = useState(false);
 	const APIkey = "67fccf071e4c18dd1da570918ad48e4a";
 	const currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIkey}`;
 	const forecastWeather = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIkey}`;
@@ -84,6 +85,7 @@ function App() {
 			}
 		});
 		setForecastDates(dates);
+		setForecastHours(hours);
 	};
 	const handleInputChange = (e) => {
 		setCity(e.target.value);
@@ -123,6 +125,7 @@ function App() {
 						<HourlyForecast
 							{...props}
 							forecastDates={forecastDates}
+							forecastHours={forecastHours}
 						/>
 					)}
 				></Route>
