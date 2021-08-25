@@ -73,8 +73,6 @@ function App() {
 			const hour = el.dt_txt.slice(11);
 			const temp = el.main;
 
-			console.log(el);
-
 			if (dates.length === 0) {
 				dates.push(day);
 			}
@@ -102,6 +100,10 @@ function App() {
 	};
 	const handleInputChange = (e) => {
 		setCity(e.target.value);
+	};
+
+	const handleHoursTemp = (e) => {
+		console.log(e.target.value);
 	};
 
 	return (
@@ -141,6 +143,7 @@ function App() {
 							forecastHours={forecastHours}
 							minTemp={minTemp}
 							maxTemp={maxTemp}
+							click={handleHoursTemp}
 						/>
 					)}
 				></Route>

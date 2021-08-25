@@ -1,24 +1,31 @@
 import { Line } from "react-chartjs-2";
 
-const HourlyForecast = ({ forecastDates, minTemp, maxTemp }) => {
+const HourlyForecast = ({
+	forecastDates,
+	forecastHours,
+	minTemp,
+	maxTemp,
+	click,
+}) => {
 	// const dates = forecastDates.map((forecast) => (
 	// 	<h1 key={forecast}>{forecast}</h1>
 	// ));
-	// const hours = forecastHours.map((forecast) => (
-	// 	<h2 key={forecast}>{forecast}</h2>
-	// ));
+	const hours = forecastHours.map((forecast) => (
+		<button key={forecast} value={forecast} onClick={click}>
+			{forecast}
+		</button>
+	));
 
 	return (
 		<div>
-			{/* {dates}
-			{hours} */}
-			<Line
+			{hours}
+			{/* <Line
 				data={{
 					labels: [...forecastDates],
 					datasets: [
 						{
 							label: "# of Votes",
-							data: [...minTemp],
+							data: [...maxTemp],
 						},
 					],
 					backgroundColor: [
@@ -42,7 +49,7 @@ const HourlyForecast = ({ forecastDates, minTemp, maxTemp }) => {
 				height={400}
 				width={600}
 				options={{ maintainAspectRatio: false }}
-			/>
+			/> */}
 		</div>
 	);
 };
