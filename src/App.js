@@ -99,6 +99,9 @@ function App() {
 		const forecastTemp = [];
 		forecast.list.forEach((el) => {
 			const hour = el.dt_txt.slice(11);
+			console.log(el.dt_txt.slice(0, 10));
+			console.log(hour);
+			console.log(el.main.temp);
 			const temp = el.main;
 			if (hour === hourBtnValue) {
 				forecastTemp.push(temp.temp);

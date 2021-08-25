@@ -12,12 +12,16 @@ const HourlyForecast = ({
 		</button>
 	));
 
+	const dates = [...forecastDates];
+	dates.shift();
+	console.log(dates);
+
 	return (
 		<div>
 			{hours}
 			<Line
 				data={{
-					labels: [...forecastDates],
+					labels: dates,
 					datasets: [
 						{
 							label: "# of Votes",
