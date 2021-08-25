@@ -14,8 +14,7 @@ function App() {
 	const [forecast, setForecast] = useState(false);
 	const [forecastDates, setForecastDates] = useState(false);
 	const [forecastHours, setForecastHours] = useState(false);
-	const [minTemp, setMinTemp] = useState(false);
-	const [maxTemp, setMaxTemp] = useState(false);
+	const [forecastTemp, setForecastTemp] = useState(false);
 	const APIkey = "67fccf071e4c18dd1da570918ad48e4a";
 	const currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIkey}`;
 	const forecastWeather = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${APIkey}`;
@@ -63,15 +62,12 @@ function App() {
 	const showForecast = () => {
 		const dates = [];
 		const hours = [];
-		const minTemp = [];
-		const maxTemp = [];
 		forecast.list.forEach((el) => {
 			const day = el.dt_txt.slice(0, 10);
 			const numberOfDates = dates.length - 1;
 			const lastDate = dates[numberOfDates];
 
 			const hour = el.dt_txt.slice(11);
-			const temp = el.main;
 
 			if (dates.length === 0) {
 				dates.push(day);
@@ -83,27 +79,31 @@ function App() {
 
 			if (hours.length === 0) {
 				hours.push(hour);
-				minTemp.push(temp.temp_min);
-				maxTemp.push(temp.temp_max);
 			}
 
 			if (hours.indexOf(hour) === -1) {
 				hours.push(hour);
-				minTemp.push(temp.temp_min);
-				maxTemp.push(temp.temp_max);
 			}
 		});
 		setForecastDates(dates);
 		setForecastHours(hours);
-		setMinTemp(minTemp);
-		setMaxTemp(maxTemp);
 	};
 	const handleInputChange = (e) => {
 		setCity(e.target.value);
 	};
 
 	const handleHoursTemp = (e) => {
-		console.log(e.target.value);
+		const hourBtnValue = e.target.value;
+		const forecastTemp = [];
+		forecast.list.forEach((el) => {
+			const hour = el.dt_txt.slice(11);
+			const temp = el.main;
+			if (hour === hourBtnValue) {
+				forecastTemp.push(temp.temp);
+			}
+		});
+		console.log(forecastTemp);
+		setForecastTemp(forecastTemp);
 	};
 
 	return (
@@ -141,8 +141,7 @@ function App() {
 							{...props}
 							forecastDates={forecastDates}
 							forecastHours={forecastHours}
-							minTemp={minTemp}
-							maxTemp={maxTemp}
+							forecastTemp={forecastTemp}
 							click={handleHoursTemp}
 						/>
 					)}

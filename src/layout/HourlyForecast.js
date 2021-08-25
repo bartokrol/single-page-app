@@ -3,8 +3,7 @@ import { Line } from "react-chartjs-2";
 const HourlyForecast = ({
 	forecastDates,
 	forecastHours,
-	minTemp,
-	maxTemp,
+	forecastTemp,
 	click,
 }) => {
 	// const dates = forecastDates.map((forecast) => (
@@ -25,7 +24,7 @@ const HourlyForecast = ({
 					datasets: [
 						{
 							label: "# of Votes",
-							data: [...maxTemp],
+							data: [...forecastTemp],
 						},
 					],
 					backgroundColor: [
