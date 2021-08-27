@@ -98,17 +98,20 @@ function App() {
 				hours.push(hour);
 			}
 		});
-
 		let specificDay = [];
-
+		let count = 0;
 		for (let day of days) {
 			const dayIndex = days.indexOf(day);
 			const nextDayIndex = dayIndex + 1;
+			const lastDay = days[39].day;
+
 			if (typeof days[nextDayIndex] !== "undefined") {
 				if (
 					days[dayIndex].day === days[nextDayIndex].day ||
-					days[dayIndex].hour === "21:00:00"
+					days[dayIndex].hour === "21:00:00" ||
+					days[dayIndex].day === lastDay
 				) {
+					count++;
 					specificDay.push({
 						day: days[dayIndex].day,
 						hour: days[dayIndex].hour,
@@ -116,7 +119,10 @@ function App() {
 					});
 				}
 				if (days)
-					if (days[dayIndex].day !== days[nextDayIndex].day) {
+					if (
+						days[dayIndex].day !== days[nextDayIndex].day ||
+						count === 39
+					) {
 						daysWithHours.push(specificDay);
 						specificDay = [];
 					}
@@ -134,7 +140,7 @@ function App() {
 		const hourBtnValue = e.target.value;
 		const days = [];
 		const temps = [];
-		console.log(daysWithHours);
+
 		daysWithHours.forEach((day) =>
 			day.forEach((el) => {
 				if (el.hour === hourBtnValue) {
@@ -144,24 +150,9 @@ function App() {
 			})
 		);
 
-		console.log(days);
 		setForecastShown(true);
 		setForecastDates(days);
 		setForecastTemp(temps);
-		// const forecastTemp = [];
-		// forecast.list.forEach((el) => {
-		// 	const hour = el.dt_txt.slice(11);
-		// 	console.log(el.dt_txt.slice(0, 10));
-		// 	console.log(hour);
-		// 	console.log(el.main.temp);
-		// 	const temp = el.main;
-		// 	if (hour === hourBtnValue) {
-		// 		forecastTemp.push(temp.temp);
-		// 	}
-		// });
-		// forecastTemp.shift();
-		// console.log(forecastTemp);
-		// setForecastTemp(forecastTemp);
 	};
 
 	return (
