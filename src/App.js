@@ -102,10 +102,10 @@ function App() {
 		let count = 0;
 		for (let day of days) {
 			const dayIndex = days.indexOf(day);
-			const nextDayIndex = dayIndex + 1;
+			const nextDayIndex = dayIndex === 39 ? dayIndex : dayIndex + 1;
 			const lastDay = days[39].day;
 
-			if (typeof days[nextDayIndex] !== "undefined") {
+			if (typeof days[nextDayIndex] !== "undefined" || dayIndex === 39) {
 				if (
 					days[dayIndex].day === days[nextDayIndex].day ||
 					days[dayIndex].hour === "21:00:00" ||
@@ -121,7 +121,7 @@ function App() {
 				if (days)
 					if (
 						days[dayIndex].day !== days[nextDayIndex].day ||
-						count === 39
+						count === 40
 					) {
 						daysWithHours.push(specificDay);
 						specificDay = [];
