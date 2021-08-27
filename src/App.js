@@ -67,12 +67,14 @@ function App() {
 		const days = [];
 		const daysWithHours = [];
 		forecast.list.forEach((el) => {
-			console.log(el);
+			const lastDate = forecast.list[
+				forecast.list.length - 1
+			].dt_txt.slice(0, 10);
 			const day = el.dt_txt.slice(0, 10);
 			const hour = el.dt_txt.slice(11);
 			const temp = el.main.temp;
 			const numberOfDates = dates.length - 1;
-			const lastDate = dates[numberOfDates];
+			const nextDate = dates[numberOfDates];
 
 			days.push({
 				day,
@@ -80,11 +82,11 @@ function App() {
 				temp,
 			});
 
-			if (dates.length === 0) {
-				dates.push(day);
-			}
-
-			if (day !== lastDate && lastDate !== undefined) {
+			if (
+				dates.length === 0 ||
+				(day !== nextDate && nextDate !== undefined) ||
+				(day === lastDate && !dates.indexOf(day))
+			) {
 				dates.push(day);
 			}
 
@@ -120,12 +122,8 @@ function App() {
 					}
 			}
 		}
-		// daysWithHours.forEach((day) => console.log(day));
-		// dates.shift();
-		// hours.shift();
 		setForecastDates(dates);
 		setForecastHours(hours);
-		// handleHoursTemp(e);
 		setDaysWithHours(daysWithHours);
 	};
 	const handleInputChange = (e) => {
@@ -136,6 +134,7 @@ function App() {
 		const hourBtnValue = e.target.value;
 		const days = [];
 		const temps = [];
+		console.log(daysWithHours);
 		daysWithHours.forEach((day) =>
 			day.forEach((el) => {
 				if (el.hour === hourBtnValue) {
@@ -144,6 +143,8 @@ function App() {
 				}
 			})
 		);
+
+		console.log(days);
 		setForecastShown(true);
 		setForecastDates(days);
 		setForecastTemp(temps);
