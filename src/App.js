@@ -103,16 +103,21 @@ function App() {
 			const dayIndex = days.indexOf(day);
 			const nextDayIndex = dayIndex + 1;
 			if (typeof days[nextDayIndex] !== "undefined") {
-				if (days[dayIndex].day === days[nextDayIndex].day) {
+				if (
+					days[dayIndex].day === days[nextDayIndex].day ||
+					days[dayIndex].hour === "21:00:00"
+				) {
 					specificDay.push({
 						day: days[dayIndex].day,
 						hour: days[dayIndex].hour,
 						temp: days[dayIndex].temp,
 					});
-				} else {
-					daysWithHours.push(specificDay);
-					specificDay = [];
 				}
+				if (days)
+					if (days[dayIndex].day !== days[nextDayIndex].day) {
+						daysWithHours.push(specificDay);
+						specificDay = [];
+					}
 			}
 		}
 		// daysWithHours.forEach((day) => console.log(day));
