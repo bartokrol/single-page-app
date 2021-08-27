@@ -63,53 +63,86 @@ function App() {
 	const showForecast = (e) => {
 		const dates = [];
 		const hours = [];
+		const days = [];
+		const daysWithHours = [];
 		forecast.list.forEach((el) => {
 			const day = el.dt_txt.slice(0, 10);
+			const hour = el.dt_txt.slice(11);
 			const numberOfDates = dates.length - 1;
 			const lastDate = dates[numberOfDates];
 
-			const hour = el.dt_txt.slice(11);
+			// console.log(day);
+			// console.log(hour);
+			days.push({
+				day,
+				hour,
+			});
+			// console.log(days);
 
-			if (dates.length === 0) {
-				dates.push(day);
-			}
+			// const hour = el.dt_txt.slice(11);
 
-			if (day !== lastDate && lastDate !== undefined) {
-				dates.push(day);
-			}
+			// if (dates.length === 0) {
+			// 	dates.push(day);
+			// }
 
-			if (hours.length === 0) {
-				hours.push(hour);
-			}
+			// if (day !== lastDate && lastDate !== undefined) {
+			// 	dates.push(day);
+			// }
 
-			if (hours.indexOf(hour) === -1) {
-				hours.push(hour);
-			}
+			// if (hours.length === 0) {
+			// 	hours.push(hour);
+			// }
+
+			// if (hours.indexOf(hour) === -1) {
+			// 	hours.push(hour);
+			// }
 		});
-		setForecastDates(dates);
-		setForecastHours(hours);
-		handleHoursTemp(e);
+
+		let specificDay = [];
+
+		for (let day of days) {
+			const dayIndex = days.indexOf(day);
+			const nextDayIndex = dayIndex + 1;
+			if (typeof days[nextDayIndex] !== "undefined") {
+				if (days[dayIndex].day === days[nextDayIndex].day) {
+					specificDay.push({
+						day: days[dayIndex].day,
+						hour: days[dayIndex].hour,
+					});
+				} else {
+					daysWithHours.push(specificDay);
+					specificDay = [];
+				}
+			}
+		}
+		console.log(daysWithHours);
+		// dates.shift();
+		// hours.shift();
+		// setForecastDates(dates);
+		// setForecastHours(hours);
+		// handleHoursTemp(e);
 	};
 	const handleInputChange = (e) => {
 		setCity(e.target.value);
 	};
 
-	const handleHoursTemp = (e) => {
-		const hourBtnValue = e.target.value;
-		const forecastTemp = [];
-		forecast.list.forEach((el) => {
-			const hour = el.dt_txt.slice(11);
-			console.log(el.dt_txt.slice(0, 10));
-			console.log(hour);
-			console.log(el.main.temp);
-			const temp = el.main;
-			if (hour === hourBtnValue) {
-				forecastTemp.push(temp.temp);
-			}
-		});
-		console.log(forecastTemp);
-		setForecastTemp(forecastTemp);
-	};
+	// const handleHoursTemp = (e) => {
+	// 	const hourBtnValue = e.target.value;
+	// 	const forecastTemp = [];
+	// 	forecast.list.forEach((el) => {
+	// 		const hour = el.dt_txt.slice(11);
+	// 		console.log(el.dt_txt.slice(0, 10));
+	// 		console.log(hour);
+	// 		console.log(el.main.temp);
+	// 		const temp = el.main;
+	// 		if (hour === hourBtnValue) {
+	// 			forecastTemp.push(temp.temp);
+	// 		}
+	// 	});
+	// 	forecastTemp.shift();
+	// 	console.log(forecastTemp);
+	// 	setForecastTemp(forecastTemp);
+	// };
 
 	return (
 		<Router>
@@ -147,7 +180,7 @@ function App() {
 							forecastDates={forecastDates}
 							forecastHours={forecastHours}
 							forecastTemp={forecastTemp}
-							click={handleHoursTemp}
+							// click={handleHoursTemp}
 						/>
 					)}
 				></Route>

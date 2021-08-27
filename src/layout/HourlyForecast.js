@@ -6,22 +6,20 @@ const HourlyForecast = ({
 	forecastTemp,
 	click,
 }) => {
-	const hours = forecastHours.map((forecast) => (
-		<button key={forecast} value={forecast} onClick={click}>
-			{forecast}
-		</button>
-	));
+	// const hours = forecastHours.map((forecast) => (
+	// 	<button key={forecast} value={forecast} onClick={click}>
+	// 		{forecast}
+	// 	</button>
+	// ));
 
-	const dates = [...forecastDates];
-	dates.shift();
-	console.log(dates);
+	
 
 	return (
 		<div>
-			{hours}
+			{/* {hours}
 			<Line
 				data={{
-					labels: dates,
+					labels: [...forecastDates],
 					datasets: [
 						{
 							label: "# of Votes",
@@ -50,7 +48,7 @@ const HourlyForecast = ({
 				// width={600}
 				className="graph"
 				options={{ maintainAspectRatio: false }}
-			/>
+			/> */}
 		</div>
 	);
 };
