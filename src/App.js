@@ -14,6 +14,7 @@ function App() {
 	const [forecast, setForecast] = useState(false);
 	const [forecastDates, setForecastDates] = useState(false);
 	const [forecastHours, setForecastHours] = useState(false);
+	const [forecastShow, setForecastShown] = useState(false);
 	const [forecastTemp, setForecastTemp] = useState(false);
 	const [daysWithHours, setDaysWithHours] = useState(false);
 	const APIkey = "67fccf071e4c18dd1da570918ad48e4a";
@@ -138,6 +139,7 @@ function App() {
 				}
 			})
 		);
+		setForecastShown(true);
 		setForecastDates(days);
 		setForecastTemp(temps);
 		// const forecastTemp = [];
@@ -189,6 +191,7 @@ function App() {
 					render={(props) => (
 						<HourlyForecast
 							{...props}
+							forecastShow={forecastShow}
 							forecastDates={forecastDates}
 							forecastHours={forecastHours}
 							forecastTemp={forecastTemp}
