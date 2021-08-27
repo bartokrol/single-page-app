@@ -15,7 +15,7 @@ function App() {
 	const [forecastDates, setForecastDates] = useState(false);
 	const [forecastHours, setForecastHours] = useState(false);
 	const [forecastTemp, setForecastTemp] = useState(false);
-
+	const [daysWithHours, setDaysWithHours] = useState(false);
 	const APIkey = "67fccf071e4c18dd1da570918ad48e4a";
 	const currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIkey}`;
 	const forecastWeather = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${APIkey}`;
@@ -66,36 +66,34 @@ function App() {
 		const days = [];
 		const daysWithHours = [];
 		forecast.list.forEach((el) => {
+			console.log(el);
 			const day = el.dt_txt.slice(0, 10);
 			const hour = el.dt_txt.slice(11);
+			const temp = el.main.temp;
 			const numberOfDates = dates.length - 1;
 			const lastDate = dates[numberOfDates];
 
-			// console.log(day);
-			// console.log(hour);
 			days.push({
 				day,
 				hour,
+				temp,
 			});
-			// console.log(days);
 
-			// const hour = el.dt_txt.slice(11);
+			if (dates.length === 0) {
+				dates.push(day);
+			}
 
-			// if (dates.length === 0) {
-			// 	dates.push(day);
-			// }
+			if (day !== lastDate && lastDate !== undefined) {
+				dates.push(day);
+			}
 
-			// if (day !== lastDate && lastDate !== undefined) {
-			// 	dates.push(day);
-			// }
+			if (hours.length === 0) {
+				hours.push(hour);
+			}
 
-			// if (hours.length === 0) {
-			// 	hours.push(hour);
-			// }
-
-			// if (hours.indexOf(hour) === -1) {
-			// 	hours.push(hour);
-			// }
+			if (hours.indexOf(hour) === -1) {
+				hours.push(hour);
+			}
 		});
 
 		let specificDay = [];
@@ -108,6 +106,7 @@ function App() {
 					specificDay.push({
 						day: days[dayIndex].day,
 						hour: days[dayIndex].hour,
+						temp: days[dayIndex].temp,
 					});
 				} else {
 					daysWithHours.push(specificDay);
@@ -115,34 +114,47 @@ function App() {
 				}
 			}
 		}
-		console.log(daysWithHours);
+		// daysWithHours.forEach((day) => console.log(day));
 		// dates.shift();
 		// hours.shift();
-		// setForecastDates(dates);
-		// setForecastHours(hours);
+		setForecastDates(dates);
+		setForecastHours(hours);
 		// handleHoursTemp(e);
+		setDaysWithHours(daysWithHours);
 	};
 	const handleInputChange = (e) => {
 		setCity(e.target.value);
 	};
 
-	// const handleHoursTemp = (e) => {
-	// 	const hourBtnValue = e.target.value;
-	// 	const forecastTemp = [];
-	// 	forecast.list.forEach((el) => {
-	// 		const hour = el.dt_txt.slice(11);
-	// 		console.log(el.dt_txt.slice(0, 10));
-	// 		console.log(hour);
-	// 		console.log(el.main.temp);
-	// 		const temp = el.main;
-	// 		if (hour === hourBtnValue) {
-	// 			forecastTemp.push(temp.temp);
-	// 		}
-	// 	});
-	// 	forecastTemp.shift();
-	// 	console.log(forecastTemp);
-	// 	setForecastTemp(forecastTemp);
-	// };
+	const handleHoursTemp = (e) => {
+		const hourBtnValue = e.target.value;
+		const days = [];
+		const temps = [];
+		daysWithHours.forEach((day) =>
+			day.forEach((el) => {
+				if (el.hour === hourBtnValue) {
+					days.push(el.day);
+					temps.push(el.temp);
+				}
+			})
+		);
+		setForecastDates(days);
+		setForecastTemp(temps);
+		// const forecastTemp = [];
+		// forecast.list.forEach((el) => {
+		// 	const hour = el.dt_txt.slice(11);
+		// 	console.log(el.dt_txt.slice(0, 10));
+		// 	console.log(hour);
+		// 	console.log(el.main.temp);
+		// 	const temp = el.main;
+		// 	if (hour === hourBtnValue) {
+		// 		forecastTemp.push(temp.temp);
+		// 	}
+		// });
+		// forecastTemp.shift();
+		// console.log(forecastTemp);
+		// setForecastTemp(forecastTemp);
+	};
 
 	return (
 		<Router>
@@ -180,7 +192,8 @@ function App() {
 							forecastDates={forecastDates}
 							forecastHours={forecastHours}
 							forecastTemp={forecastTemp}
-							// click={handleHoursTemp}
+							daysWithHours={daysWithHours}
+							click={handleHoursTemp}
 						/>
 					)}
 				></Route>
