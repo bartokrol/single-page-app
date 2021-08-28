@@ -19,12 +19,12 @@ function App() {
 	const [forecastTemp, setForecastTemp] = useState(false);
 	const [daysWithHours, setDaysWithHours] = useState(false);
 	const APIkey = "67fccf071e4c18dd1da570918ad48e4a";
+	const [tempUnitChosen, setTempUnitChosen] = useState(false);
 	const [tempUnit, setTempUnit] = useState("");
 	const currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${city}${tempUnit}&appid=${APIkey}`;
 	const forecastWeather = `https://api.openweathermap.org/data/2.5/forecast?q=${city}${tempUnit}&appid=${APIkey}`;
 
 	const handleFetchClick = () => {
-		console.log(currentWeather);
 		setInputError(false);
 
 		isFetch = true;
@@ -35,8 +35,8 @@ function App() {
 			setInputError(inputError);
 			setInputErrorMessage("Enter city name");
 		}
-
-		if (isFetch && city) {
+		handleTempUnitError();
+		if (isFetch && city && tempUnitChosen) {
 			fetch(currentWeather)
 				.then((response) => response.json())
 				.then((data) => {
@@ -61,6 +61,14 @@ function App() {
 			const inputError = true;
 			setInputError(inputError);
 			setInputErrorMessage("Enter correct city name");
+		}
+	};
+
+	const handleTempUnitError = () => {
+		if (!tempUnitChosen) {
+			const inputError = true;
+			setInputError(inputError);
+			setInputErrorMessage("Temperature unit has to be chosen");
 		}
 	};
 
@@ -160,6 +168,7 @@ function App() {
 
 	const handleTempUnit = (e) => {
 		const tempUnit = e.target.value;
+		setTempUnitChosen(true);
 		setTempUnit(tempUnit);
 	};
 
