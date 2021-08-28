@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import StartingPage from "./layout/StartingPage";
 import CurrentWeather from "./layout/CurrentWeather";
 import ForecastNav from "./layout/ForecastNav";
 import HourlyForecast from "./layout/HourlyForecast";
@@ -37,6 +38,7 @@ function App() {
 			fetch(currentWeather)
 				.then((response) => response.json())
 				.then((data) => {
+					console.log(data);
 					setWeather(data);
 					setFetch(false);
 					handleWrongCityNameInputError(city, data);
@@ -158,17 +160,13 @@ function App() {
 	return (
 		<Router>
 			<div className="App">
-				<input
-					type="text"
-					placeholder="Enter city name..."
-					onChange={handleInputChange}
-					value={city}
-					className="App__searchInput"
+				<StartingPage
+					change={handleInputChange}
+					city={city}
+					inputError={inputError}
+					inputErrorMessage={inputErrorMessage}
+					click={handleFetchClick}
 				/>
-				{inputError ? <p>{inputErrorMessage}</p> : null}
-				<button className="App__fetchBtn" onClick={handleFetchClick}>
-					Klik
-				</button>
 				{typeof weather.main != "undefined" ? (
 					<div classame="App__forecast">
 						<ForecastNav click={showForecast} />
