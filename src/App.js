@@ -19,10 +19,12 @@ function App() {
 	const [forecastTemp, setForecastTemp] = useState(false);
 	const [daysWithHours, setDaysWithHours] = useState(false);
 	const APIkey = "67fccf071e4c18dd1da570918ad48e4a";
-	const currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIkey}`;
-	const forecastWeather = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${APIkey}`;
+	const [tempUnit, setTempUnit] = useState("");
+	const currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${city}${tempUnit}&appid=${APIkey}`;
+	const forecastWeather = `https://api.openweathermap.org/data/2.5/forecast?q=${city}${tempUnit}&appid=${APIkey}`;
 
 	const handleFetchClick = () => {
+		console.log(currentWeather);
 		setInputError(false);
 
 		isFetch = true;
@@ -38,7 +40,6 @@ function App() {
 			fetch(currentWeather)
 				.then((response) => response.json())
 				.then((data) => {
-					console.log(data);
 					setWeather(data);
 					setFetch(false);
 					handleWrongCityNameInputError(city, data);
@@ -157,6 +158,11 @@ function App() {
 		setForecastTemp(temps);
 	};
 
+	const handleTempUnit = (e) => {
+		const tempUnit = e.target.value;
+		setTempUnit(tempUnit);
+	};
+
 	const forecastNav =
 		typeof weather.main != "undefined" ? (
 			<div classame="App__forecast">
@@ -175,6 +181,7 @@ function App() {
 					inputError={inputError}
 					inputErrorMessage={inputErrorMessage}
 					click={handleFetchClick}
+					clickUnit={handleTempUnit}
 				/>
 				{forecastNav}
 				<Route

@@ -4,6 +4,7 @@ const StartingPage = ({
 	inputError,
 	inputErrorMessage,
 	click,
+	clickUnit,
 }) => {
 	return (
 		<div>
@@ -18,6 +19,17 @@ const StartingPage = ({
 			<button className="App__fetchBtn" onClick={click}>
 				Klik
 			</button>
+			<div>
+				<button onClick={clickUnit} value="&units=metric">
+					Celsius
+				</button>
+				<button onClick={clickUnit} value="">
+					Kelvin
+				</button>
+				<button onClick={clickUnit} value="&units=imperial">
+					Fahrenheit
+				</button>
+			</div>
 		</div>
 	);
 };
