@@ -157,6 +157,15 @@ function App() {
 		setForecastTemp(temps);
 	};
 
+	const forecastNav =
+		typeof weather.main != "undefined" ? (
+			<div classame="App__forecast">
+				<ForecastNav click={showForecast} />
+			</div>
+		) : (
+			" "
+		);
+
 	return (
 		<Router>
 			<div className="App">
@@ -167,14 +176,7 @@ function App() {
 					inputErrorMessage={inputErrorMessage}
 					click={handleFetchClick}
 				/>
-				{typeof weather.main != "undefined" ? (
-					<div classame="App__forecast">
-						<ForecastNav click={showForecast} />
-					</div>
-				) : (
-					" "
-				)}
-
+				{forecastNav}
 				<Route
 					path="/currentWeather"
 					render={(props) => (
