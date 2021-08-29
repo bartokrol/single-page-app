@@ -30,12 +30,13 @@ function App() {
 		isFetch = true;
 		setFetch(isFetch);
 
+		handleTempUnitError();
 		if (city.length === 0) {
 			const inputError = true;
 			setInputError(inputError);
 			setInputErrorMessage("Enter city name");
 		}
-		handleTempUnitError();
+
 		if (isFetch && city && tempUnitChosen) {
 			fetch(currentWeather)
 				.then((response) => response.json())
@@ -139,6 +140,7 @@ function App() {
 					}
 			}
 		}
+
 		setForecastDates(dates);
 		setForecastHours(hours);
 		setDaysWithHours(daysWithHours);
@@ -172,6 +174,11 @@ function App() {
 		setTempUnit(tempUnit);
 	};
 
+	const handleClearUnit = () => {
+		setTempUnitChosen(false);
+		setTempUnit("");
+	};
+
 	const forecastNav =
 		typeof weather.main != "undefined" ? (
 			<div classame="App__forecast">
@@ -191,6 +198,8 @@ function App() {
 					inputErrorMessage={inputErrorMessage}
 					click={handleFetchClick}
 					clickUnit={handleTempUnit}
+					tempUnitChosen={tempUnitChosen}
+					clearUnit={handleClearUnit}
 				/>
 				{forecastNav}
 				<Route
