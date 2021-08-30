@@ -7,10 +7,10 @@ const StartingPage = ({
 	inputErrorMessage,
 	click,
 	clickUnit,
-	tempUnit,
+	tempUnitChosen,
 	clearUnit,
 }) => {
-	const tempUnitBtns = tempUnit ? (
+	const tempUnitBtns = tempUnitChosen ? (
 		<Link to="/">
 			<button onClick={clearUnit}>Choose other temperature unit</button>
 		</Link>
@@ -28,7 +28,7 @@ const StartingPage = ({
 		</div>
 	);
 
-	const cityInputAndSubmitBtn = tempUnit ? null : (
+	const cityInputAndSubmitBtn = (
 		<>
 			<input
 				type="text"
@@ -37,6 +37,7 @@ const StartingPage = ({
 				value={city}
 				className="App__searchInput"
 			/>
+
 			{inputError ? <p>{inputErrorMessage}</p> : null}
 			<button className="App__fetchBtn" onClick={click}>
 				Klik
