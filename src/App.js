@@ -26,9 +26,15 @@ function App() {
 
 	const handleFetchClick = () => {
 		setInputError(false);
+		setTempUnitChosen(false);
+		setWeather("");
 
 		isFetch = true;
 		setFetch(isFetch);
+
+		if (tempUnit) {
+			setTempUnitChosen(true);
+		}
 
 		handleTempUnitError();
 		if (city.length === 0) {
@@ -37,7 +43,7 @@ function App() {
 			setInputErrorMessage("Enter city name");
 		}
 
-		if (isFetch && city && tempUnitChosen) {
+		if (isFetch && city && tempUnit) {
 			fetch(currentWeather)
 				.then((response) => response.json())
 				.then((data) => {
@@ -66,7 +72,7 @@ function App() {
 	};
 
 	const handleTempUnitError = () => {
-		if (!tempUnitChosen) {
+		if (!tempUnit) {
 			const inputError = true;
 			setInputError(inputError);
 			setInputErrorMessage("Temperature unit has to be chosen");
@@ -170,11 +176,12 @@ function App() {
 
 	const handleTempUnit = (e) => {
 		const tempUnit = e.target.value;
-		setTempUnitChosen(true);
 		setTempUnit(tempUnit);
 	};
 
 	const handleClearUnit = () => {
+		setCity("");
+		setInputErrorMessage("");
 		setTempUnitChosen(false);
 		setTempUnit("");
 	};
@@ -198,10 +205,35 @@ function App() {
 					inputErrorMessage={inputErrorMessage}
 					click={handleFetchClick}
 					clickUnit={handleTempUnit}
-					tempUnitChosen={tempUnitChosen}
+					tempUnit={tempUnit}
 					clearUnit={handleClearUnit}
 				/>
-				{forecastNav}
+				{tempUnitChosen ? (
+					<>
+						{forecastNav}
+						<Route
+							path="/currentWeather"
+							render={(props) => (
+								<CurrentWeather {...props} weather={weather} />
+							)}
+						></Route>
+						<Route
+							path="/hourlyForecast"
+							render={(props) => (
+								<HourlyForecast
+									{...props}
+									forecastShow={forecastShow}
+									forecastDates={forecastDates}
+									forecastHours={forecastHours}
+									forecastTemp={forecastTemp}
+									daysWithHours={daysWithHours}
+									click={handleHoursTemp}
+								/>
+							)}
+						></Route>
+					</>
+				) : null}
+				{/* {forecastNav}
 				<Route
 					path="/currentWeather"
 					render={(props) => (
@@ -221,7 +253,7 @@ function App() {
 							click={handleHoursTemp}
 						/>
 					)}
-				></Route>
+				></Route> */}
 			</div>
 		</Router>
 	);

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const StartingPage = ({
 	change,
 	city,
@@ -5,10 +7,14 @@ const StartingPage = ({
 	inputErrorMessage,
 	click,
 	clickUnit,
-	tempUnitChosen,
-	clearUnit
+	tempUnit,
+	clearUnit,
 }) => {
-	const tempUnitBtns = tempUnitChosen ? <button onClick={clearUnit}>Choose other temperature unit</button> : (
+	const tempUnitBtns = tempUnit ? (
+		<Link to="/">
+			<button onClick={clearUnit}>Choose other temperature unit</button>
+		</Link>
+	) : (
 		<div>
 			<button onClick={clickUnit} value="&units=metric">
 				Celsius
@@ -22,8 +28,8 @@ const StartingPage = ({
 		</div>
 	);
 
-	return (
-		<div>
+	const cityInputAndSubmitBtn = tempUnit ? null : (
+		<>
 			<input
 				type="text"
 				placeholder="Enter city name..."
@@ -35,6 +41,12 @@ const StartingPage = ({
 			<button className="App__fetchBtn" onClick={click}>
 				Klik
 			</button>
+		</>
+	);
+
+	return (
+		<div>
+			{cityInputAndSubmitBtn}
 			{tempUnitBtns}
 		</div>
 	);
