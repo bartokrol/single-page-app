@@ -7,22 +7,30 @@ const StartingPage = ({
 	inputErrorMessage,
 	click,
 	clickUnit,
-	tempUnitChosen,
+	tempUnitForWeatherChosen,
 	clearUnit,
 }) => {
-	const tempUnitBtns = tempUnitChosen ? (
+	const tempUnitBtns = tempUnitForWeatherChosen ? (
 		<Link to="/">
 			<button onClick={clearUnit}>Choose other temperature unit</button>
 		</Link>
 	) : (
 		<div>
-			<button onClick={clickUnit} value="&units=metric">
+			<button
+				onClick={clickUnit}
+				data-unit="&units=metric"
+				data-city={city}
+			>
 				Celsius
 			</button>
-			<button onClick={clickUnit} value="">
+			<button onClick={clickUnit} data-unit="" data-city={city}>
 				Kelvin
 			</button>
-			<button onClick={clickUnit} value="&units=imperial">
+			<button
+				onClick={clickUnit}
+				data-unit="&units=imperial"
+				data-city={city}
+			>
 				Fahrenheit
 			</button>
 		</div>

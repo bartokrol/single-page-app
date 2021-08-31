@@ -19,10 +19,11 @@ function App() {
 	const [forecastTemp, setForecastTemp] = useState(false);
 	const [daysWithHours, setDaysWithHours] = useState(false);
 	const APIkey = "67fccf071e4c18dd1da570918ad48e4a";
-	const [tempUnitChosen, setTempUnitChosen] = useState(false);
-	const [tempUnit, setTempUnit] = useState(false);
-	const currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${city}${tempUnit}&appid=${APIkey}`;
-	const forecastWeather = `https://api.openweathermap.org/data/2.5/forecast?q=${city}${tempUnit}&appid=${APIkey}`;
+	const [tempUnitForWeatherChosen, setTempUnitForWeatherChosen] =
+		useState(false);
+	const [tempUnitForWeather, setTempUnitForWeather] = useState(false);
+	const [tempUnitForForecast, setTempUnitForForecast] = useState(false);
+	const [navigationVisibility, setNavigationVisibility] = useState(false);
 
 	const handleFetchClick = () => {
 		setInputError(false);
@@ -31,34 +32,35 @@ function App() {
 		isFetch = true;
 		setFetch(isFetch);
 
-		if (tempUnit) {
-			setTempUnitChosen(true);
-		}
-
 		handleTempUnitError();
-		if (city.length === 0) {
-			const inputError = true;
-			setInputError(inputError);
-			setInputErrorMessage("Enter city name");
-		}
+		checkCityLength();
 
-		if (isFetch && city && tempUnit) {
-			fetch(currentWeather)
+		if (isFetch && city && tempUnitForWeather) {
+			fetch(tempUnitForWeather)
 				.then((response) => response.json())
 				.then((data) => {
 					setWeather(data);
 					setFetch(false);
 					handleWrongCityNameInputError(city, data);
+					setNavigationVisibility(true);
+					setCity(false);
 				})
 				.catch((error) => console.log(error));
 
-			fetch(forecastWeather)
+			fetch(tempUnitForForecast)
 				.then((response) => response.json())
 				.then((data) => {
 					setForecast(data);
-					setFetch(false);
 				})
 				.catch((error) => console.log(error));
+		}
+	};
+
+	const checkCityLength = () => {
+		if (city.length === 0) {
+			const inputError = true;
+			setInputError(inputError);
+			setInputErrorMessage("Enter city name");
 		}
 	};
 
@@ -71,7 +73,7 @@ function App() {
 	};
 
 	const handleTempUnitError = () => {
-		if (!tempUnit) {
+		if (!tempUnitForWeather) {
 			const inputError = true;
 			setInputError(inputError);
 			setInputErrorMessage("Temperature unit has to be chosen");
@@ -174,15 +176,20 @@ function App() {
 	};
 
 	const handleTempUnit = (e) => {
-		const tempUnit = e.target.value;
-		setTempUnit(tempUnit);
+		const unit = e.target.dataset.unit;
+		const city = e.target.dataset.city;
+		const tempUnitForWeather = `https://api.openweathermap.org/data/2.5/weather?q=${city}${unit}&appid=${APIkey}`;
+		const tempUnitForForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}${unit}&appid=${APIkey}`;
+		setTempUnitForWeatherChosen(true);
+		setTempUnitForWeather(tempUnitForWeather);
+		setTempUnitForForecast(tempUnitForForecast);
 	};
 
 	const handleClearUnit = () => {
-		setCity("");
 		setInputErrorMessage("");
-		setTempUnitChosen(false);
-		setTempUnit(false);
+		setTempUnitForWeatherChosen(false);
+		setTempUnitForWeather(false);
+		setNavigationVisibility(false);
 	};
 
 	const forecastNav =
@@ -200,14 +207,15 @@ function App() {
 				<StartingPage
 					change={handleInputChange}
 					city={city}
+					APIkey={APIkey}
 					inputError={inputError}
 					inputErrorMessage={inputErrorMessage}
 					click={handleFetchClick}
 					clickUnit={handleTempUnit}
-					tempUnitChosen={tempUnitChosen}
+					tempUnitForWeatherChosen={tempUnitForWeatherChosen}
 					clearUnit={handleClearUnit}
 				/>
-				{tempUnitChosen ? (
+				{navigationVisibility ? (
 					<>
 						{forecastNav}
 						<Route
