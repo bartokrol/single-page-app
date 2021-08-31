@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const StartingPage = ({
+	startingPageVisibility,
 	change,
 	city,
 	inputError,
@@ -9,6 +10,7 @@ const StartingPage = ({
 	clickUnit,
 	tempUnitForWeatherChosen,
 	clearUnit,
+	clickStartingPageVisibility,
 }) => {
 	const tempUnitBtns = tempUnitForWeatherChosen ? (
 		<Link to="/">
@@ -45,7 +47,6 @@ const StartingPage = ({
 				value={city}
 				className="App__searchInput"
 			/>
-
 			{inputError ? <p>{inputErrorMessage}</p> : null}
 			<button className="App__fetchBtn" onClick={click}>
 				Klik
@@ -55,8 +56,16 @@ const StartingPage = ({
 
 	return (
 		<div>
-			{cityInputAndSubmitBtn}
-			{tempUnitBtns}
+			{startingPageVisibility ? (
+				<>
+					{cityInputAndSubmitBtn}
+					{tempUnitBtns}
+				</>
+			) : (
+				<button onClick={clickStartingPageVisibility}>
+					Choose new city
+				</button>
+			)}
 		</div>
 	);
 };
