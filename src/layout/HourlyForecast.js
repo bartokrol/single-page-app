@@ -5,7 +5,6 @@ const HourlyForecast = ({
 	forecastDates,
 	forecastHours,
 	forecastTemp,
-	daysWithHours,
 	click,
 }) => {
 	const hours = forecastHours.map((forecast) => (
@@ -13,9 +12,6 @@ const HourlyForecast = ({
 			{forecast}
 		</button>
 	));
-
-	// console.log(forecastDates, forecastTemp);
-	// console.log(daysWithHours);
 
 	return (
 		<div>
@@ -48,8 +44,6 @@ const HourlyForecast = ({
 						],
 						borderWidth: 1,
 					}}
-					// height={400}
-					// width={600}
 					className="graph"
 					options={{ maintainAspectRatio: false }}
 				/>
