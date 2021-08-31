@@ -43,7 +43,12 @@ function App() {
 					setFetch(false);
 					handleWrongCityNameInputError(city, data);
 					setNavigationVisibility(true);
-					setCity(false);
+					setCity("");
+					setForecastDates(false);
+					setForecastHours(false);
+					setForecastShown(false);
+					setForecastTemp(false);
+					setDaysWithHours(false);
 				})
 				.catch((error) => console.log(error));
 
@@ -240,27 +245,6 @@ function App() {
 						></Route>
 					</>
 				) : null}
-				{/* {forecastNav}
-				<Route
-					path="/currentWeather"
-					render={(props) => (
-						<CurrentWeather {...props} weather={weather} />
-					)}
-				></Route>
-				<Route
-					path="/hourlyForecast"
-					render={(props) => (
-						<HourlyForecast
-							{...props}
-							forecastShow={forecastShow}
-							forecastDates={forecastDates}
-							forecastHours={forecastHours}
-							forecastTemp={forecastTemp}
-							daysWithHours={daysWithHours}
-							click={handleHoursTemp}
-						/>
-					)}
-				></Route> */}
 			</div>
 		</Router>
 	);
