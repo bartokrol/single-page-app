@@ -62,9 +62,11 @@ const StartingPage = ({
 					{tempUnitBtns}
 				</>
 			) : (
-				<button onClick={clickStartingPageVisibility}>
-					Choose new city
-				</button>
+				<Link to="/">
+					<button onClick={clickStartingPageVisibility}>
+						Choose new city
+					</button>
+				</Link>
 			)}
 		</div>
 	);
