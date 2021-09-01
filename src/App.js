@@ -3,7 +3,7 @@ import { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import StartingPage from "./layout/StartingPage";
 import CurrentWeather from "./layout/CurrentWeather";
-import ForecastNav from "./layout/ForecastNav";
+import WeatherAppNav from "./layout/WeatherAppNav";
 import HourlyForecast from "./layout/HourlyForecast";
 
 function App() {
@@ -192,9 +192,12 @@ function App() {
 
 	const forecastNav =
 		typeof weather.main != "undefined" ? (
-			<div classame="App__forecast">
-				<ForecastNav click={showForecast} />
-			</div>
+			<>
+				<WeatherAppNav
+					weatherAppNavClassName={`${weatherAppClassName}`}
+					click={showForecast}
+				/>
+			</>
 		) : (
 			" "
 		);

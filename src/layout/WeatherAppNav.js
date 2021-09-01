@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 
-const ForecastNav = ({ click }) => {
+const ForecastNav = ({ click, weatherAppNavClassName }) => {
 	const basicTemp = "15:00:00";
+	const className = `${weatherAppNavClassName}__nav`;
 	return (
-		<ul classame="App__forecast__nav">
-			<li classame="App__forecast__nav__navItem">
+		<ul classame={className}>
+			<li classame={`${className}__listItem`}>
 				<Link to="/currentWeather">Current Weather</Link>
 			</li>
-			<li classame="App__forecast__nav__navItem" onClick={click}>
+			<li classame={`${className}__listItem`} onClick={click}>
 				<Link to="/hourlyForecast" value={basicTemp}>
 					Hourly Forecast
 				</Link>
