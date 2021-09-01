@@ -27,6 +27,7 @@ function App() {
 	const APIkey = "67fccf071e4c18dd1da570918ad48e4a";
 	const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}${tempUnit}&appid=${APIkey}`;
 	const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}${tempUnit}&appid=${APIkey}`;
+	const weatherAppClassName = "weatherApp";
 
 	const handleFetchClick = () => {
 		setWeather("");
@@ -205,7 +206,7 @@ function App() {
 
 	return (
 		<Router>
-			<div className="App">
+			<div className={weatherAppClassName}>
 				<StartingPage
 					startingPageVisibility={startingPageVisibility}
 					change={handleInputChange}
@@ -217,6 +218,7 @@ function App() {
 					tempUnitForWeatherChosen={tempUnitForWeatherChosen}
 					clearUnit={handleClearUnit}
 					clickStartingPageVisibility={handleStartingPageVisibility}
+					startingPageBasicClass={weatherAppClassName}
 				/>
 				{navigationVisibility ? forecastNav : null}
 				<>

@@ -11,24 +11,36 @@ const StartingPage = ({
 	tempUnitForWeatherChosen,
 	clearUnit,
 	clickStartingPageVisibility,
+	startingPageBasicClass,
 }) => {
+	const className = `${startingPageBasicClass}__startingPage`;
+
 	const tempUnitBtns = tempUnitForWeatherChosen ? (
 		<Link to="/">
-			<button onClick={clearUnit}>Choose other temperature unit</button>
+			<button className={`${className}__clearUnitBtn`} onClick={clearUnit}>
+				Choose other temperature unit
+			</button>
 		</Link>
 	) : (
-		<div>
+		<div className={`${className}__unitsBtns`}>
 			<button
+				className={`${className}__unitsBtns__btn`}
 				onClick={clickUnit}
 				data-unit="&units=metric"
 				data-city={city}
 			>
 				Celsius
 			</button>
-			<button onClick={clickUnit} data-unit="" data-city={city}>
+			<button
+				className={`${className}__unitsBtns__btn`}
+				onClick={clickUnit}
+				data-unit=""
+				data-city={city}
+			>
 				Kelvin
 			</button>
 			<button
+				className={`${className}__unitsBtns__btn`}
 				onClick={clickUnit}
 				data-unit="&units=imperial"
 				data-city={city}
@@ -39,19 +51,22 @@ const StartingPage = ({
 	);
 
 	const cityInputAndSubmitBtn = (
-		<>
+		<div className={`${className}__cityInputContainer`}>
 			<input
+				className={`${className}__cityInputContainer__input`}
 				type="text"
 				placeholder="Enter city name..."
 				onChange={change}
 				value={city}
-				className="App__searchInput"
 			/>
-			{inputError ? <p>{inputErrorMessage}</p> : null}
-			<button className="App__fetchBtn" onClick={click}>
+			{inputError ? <p className={`${className}__cityInputContainer__errorMsg`}>{inputErrorMessage}</p> : null}
+			<button
+				className={`${className}__cityInputContainer__fetchBtn`}
+				onClick={click}
+			>
 				Klik
 			</button>
-		</>
+		</div>
 	);
 
 	return (
@@ -63,7 +78,10 @@ const StartingPage = ({
 				</>
 			) : (
 				<Link to="/">
-					<button onClick={clickStartingPageVisibility}>
+					<button
+						className={`${className}__clearBtn`}
+						onClick={clickStartingPageVisibility}
+					>
 						Choose new city
 					</button>
 				</Link>
