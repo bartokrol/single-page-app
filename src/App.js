@@ -228,7 +228,11 @@ function App() {
 					<Route
 						path="/currentWeather"
 						render={(props) => (
-							<CurrentWeather {...props} weather={weather} />
+							<CurrentWeather
+								{...props}
+								weather={weather}
+								weatherAppNavClassName={`${weatherAppClassName}`}
+							/>
 						)}
 					></Route>
 					<Route

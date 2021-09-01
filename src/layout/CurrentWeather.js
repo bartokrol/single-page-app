@@ -1,17 +1,17 @@
-const CurrentWeather = ({ weather }) => {
+const CurrentWeather = ({ weather, weatherAppNavClassName }) => {
 	const weatherImg = weather.weather[0].icon;
+	const className = `${weatherAppNavClassName}__currentWeather`;
 	return (
-		<div classame="App__forecast__currentWeather">
-			<h1 classame="App__forecast__currentWeather__cityName">
+		<div classame={className}>
+			<h1 classame={`${className}__cityName`}>
 				{weather.name}, {weather.sys.country}
 			</h1>
-			<p classame="App__forecast__currentWeather__weather">
+			<p classame={`${className}__weatherDesc`}>
 				{weather.weather[0].main}
 			</p>
-			<p classame="App__forecast__currentWeather__temp">
-				{weather.main.temp}
-			</p>
+			<p classame={`${className}__temp`}>{weather.main.temp}</p>
 			<img
+				classame={`${className}__weatherImg`}
 				src={`http://openweathermap.org/img/wn/${weatherImg}@2x.png`}
 				alt="weatherImg"
 			/>
