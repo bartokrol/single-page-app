@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import StartingPage from "./layout/StartingPage";
 import CurrentWeather from "./layout/CurrentWeather";
 import WeatherAppNav from "./layout/WeatherAppNav";
-import HourlyForecast from "./layout/HourlyForecast";
+import DailyHourlyForecast from "./layout/DailyHourlyForecast";
 
 function App() {
 	const [city, setCity] = useState("");
@@ -238,7 +238,7 @@ function App() {
 					<Route
 						path="/hourlyForecast"
 						render={(props) => (
-							<HourlyForecast
+							<DailyHourlyForecast
 								{...props}
 								forecastShow={forecastShow}
 								forecastDates={forecastDates}
@@ -246,6 +246,7 @@ function App() {
 								forecastTemp={forecastTemp}
 								daysWithHours={daysWithHours}
 								click={handleHoursTemp}
+								dailyHourlyClassName={weatherAppClassName}
 							/>
 						)}
 					></Route>

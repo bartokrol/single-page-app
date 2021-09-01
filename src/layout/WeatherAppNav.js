@@ -10,7 +10,7 @@ const ForecastNav = ({ click, weatherAppNavClassName }) => {
 			</li>
 			<li classame={`${className}__listItem`} onClick={click}>
 				<Link to="/hourlyForecast" value={basicTemp}>
-					Hourly Forecast
+					Daily Hourly Forecast
 				</Link>
 			</li>
 		</ul>

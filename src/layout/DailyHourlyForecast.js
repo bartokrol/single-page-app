@@ -6,18 +6,27 @@ const HourlyForecast = ({
 	forecastHours,
 	forecastTemp,
 	click,
+	dailyHourlyClassName,
 }) => {
+	const className = `${dailyHourlyClassName}__forecast`;
+
 	const hours = forecastHours.map((forecast) => (
-		<button key={forecast} value={forecast} onClick={click}>
+		<button
+			className={`${className}__hoursBtns__hourBtn`}
+			key={forecast}
+			value={forecast}
+			onClick={click}
+		>
 			{forecast}
 		</button>
 	));
 
 	return (
-		<div>
-			{hours}
+		<div className={className}>
+			<div className={`${className}__hoursBtns`}>{hours}</div>
 			{forecastShow ? (
 				<Line
+					className={`${className}__graph`}
 					data={{
 						labels: [...forecastDates],
 						datasets: [
@@ -44,7 +53,6 @@ const HourlyForecast = ({
 						],
 						borderWidth: 1,
 					}}
-					className="graph"
 					options={{ maintainAspectRatio: false }}
 				/>
 			) : null}
