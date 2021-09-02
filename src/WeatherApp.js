@@ -1,4 +1,4 @@
-// import "./App.css";
+import "./styles//WeatherApp.css";
 import { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import StartingPage from "./layout/StartingPage";
