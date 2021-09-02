@@ -17,7 +17,10 @@ const StartingPage = ({
 
 	const tempUnitBtns = tempUnitForWeatherChosen ? (
 		<Link to="/">
-			<button className={`${className}__clearUnitBtn`} onClick={clearUnit}>
+			<button
+				className={`${className}__clearUnitBtn`}
+				onClick={clearUnit}
+			>
 				Choose other temperature unit
 			</button>
 		</Link>
@@ -51,19 +54,18 @@ const StartingPage = ({
 	);
 
 	const cityInputAndSubmitBtn = (
-		<div className={`${className}__cityInputContainer`}>
+		<div className={`${className}`}>
 			<input
-				className={`${className}__cityInputContainer__input`}
+				className={`${className}__input`}
 				type="text"
 				placeholder="Enter city name..."
 				onChange={change}
 				value={city}
 			/>
-			{inputError ? <p className={`${className}__cityInputContainer__errorMsg`}>{inputErrorMessage}</p> : null}
-			<button
-				className={`${className}__cityInputContainer__fetchBtn`}
-				onClick={click}
-			>
+			{inputError ? (
+				<p className={`${className}__errorMsg`}>{inputErrorMessage}</p>
+			) : null}
+			<button className={`${className}__fetchBtn`} onClick={click}>
 				Klik
 			</button>
 		</div>

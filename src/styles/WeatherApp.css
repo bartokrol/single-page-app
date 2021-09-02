@@ -8,4 +8,12 @@
 .weatherApp {
   text-align: center;
 }
+
+.weatherApp__startingPage {
+  background-color: burlywood;
+}
+
+.weatherApp__nav {
+  background-color: bisque;
+}
 /*# sourceMappingURL=WeatherApp.css.map */

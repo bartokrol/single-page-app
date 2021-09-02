@@ -1,3 +1,6 @@
+@import "weatherAppNav";
+@import "startingPage";
+
 * {
 	margin: 0;
 	padding: 0;
@@ -6,4 +9,6 @@
 
 .weatherApp {
 	text-align: center;
+	@include startingPage;
+	@include weatherAppNav;
 }
