@@ -16,41 +16,41 @@ const StartingPage = ({
 	const className = `${startingPageBasicClass}__startingPage`;
 
 	const tempUnitBtns = tempUnitForWeatherChosen ? (
-		<Link to="/">
-			<button
-				className={`${className}__clearUnitBtn`}
-				onClick={clearUnit}
-			>
-				Choose other temperature unit
-			</button>
+		<Link to="/" className={`${className}__clearUnitBtn`}>
+			<button onClick={clearUnit}>Choose other temperature unit</button>
 		</Link>
 	) : (
-		<div className={`${className}__unitsBtns`}>
-			<button
-				className={`${className}__unitsBtns__btn`}
-				onClick={clickUnit}
-				data-unit="&units=metric"
-				data-city={city}
-			>
-				Celsius
-			</button>
-			<button
-				className={`${className}__unitsBtns__btn`}
-				onClick={clickUnit}
-				data-unit=""
-				data-city={city}
-			>
-				Kelvin
-			</button>
-			<button
-				className={`${className}__unitsBtns__btn`}
-				onClick={clickUnit}
-				data-unit="&units=imperial"
-				data-city={city}
-			>
-				Fahrenheit
-			</button>
-		</div>
+		<>
+			<h4 className={`${className}__tempUnitHeading`}>
+				Choose temperature unit:
+			</h4>
+			<div className={`${className}__unitsBtns`}>
+				<button
+					className={`${className}__unitsBtns__btn`}
+					onClick={clickUnit}
+					data-unit="&units=metric"
+					data-city={city}
+				>
+					Celsius
+				</button>
+				<button
+					className={`${className}__unitsBtns__btn`}
+					onClick={clickUnit}
+					data-unit=""
+					data-city={city}
+				>
+					Kelvin
+				</button>
+				<button
+					className={`${className}__unitsBtns__btn`}
+					onClick={clickUnit}
+					data-unit="&units=imperial"
+					data-city={city}
+				>
+					Fahrenheit
+				</button>
+			</div>
+		</>
 	);
 
 	const cityInputAndSubmitBtn = (
@@ -66,7 +66,7 @@ const StartingPage = ({
 				<p className={`${className}__errorMsg`}>{inputErrorMessage}</p>
 			) : null}
 			<button className={`${className}__fetchBtn`} onClick={click}>
-				Klik
+				Submit
 			</button>
 		</>
 	);

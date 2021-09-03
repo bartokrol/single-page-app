@@ -1,5 +1,43 @@
 @mixin startingPage {
 	&__startingPage {
 		background-color: burlywood;
+		display: flex;
+		flex-direction: column;
+		padding: 20px;
+		&__input {
+			min-height: 30px;
+			text-align: center;
+			border-radius: 5px;
+			border: none;
+			margin-bottom: 5px;
+			font-size: 20px;
+		}
+		&__errorMsg {
+			margin-bottom: 5px;
+		}
+		&__fetchBtn {
+			margin-bottom: 5px;
+		}
+		&__tempUnitHeading {
+			margin-bottom: 5px;
+		}
+		&__unitsBtns {
+			display: flex;
+			justify-content: space-around;
+			&__btn {
+				width: 30%;
+				border-radius: 5px;
+				border: none;
+			}
+		}
+		&__clearUnitBtn {
+			border-radius: 5px;
+			border: none;
+		}
+
+		&__clearBtn {
+			border-radius: 5px;
+			border: none;
+		}
 	}
 }
