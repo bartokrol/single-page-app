@@ -54,7 +54,7 @@ const StartingPage = ({
 	);
 
 	const cityInputAndSubmitBtn = (
-		<div className={`${className}`}>
+		<>
 			<input
 				className={`${className}__input`}
 				type="text"
@@ -68,16 +68,16 @@ const StartingPage = ({
 			<button className={`${className}__fetchBtn`} onClick={click}>
 				Klik
 			</button>
-		</div>
+		</>
 	);
 
 	return (
 		<div>
 			{startingPageVisibility ? (
-				<>
+				<div className={`${className}`}>
 					{cityInputAndSubmitBtn}
 					{tempUnitBtns}
-				</>
+				</div>
 			) : (
 				<Link to="/">
 					<button

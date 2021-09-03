@@ -1,5 +1,7 @@
+@import "variables";
 @import "weatherAppNav";
 @import "startingPage";
+@import "currentWeather";
 
 * {
 	margin: 0;
@@ -11,4 +13,6 @@
 	text-align: center;
 	@include startingPage;
 	@include weatherAppNav;
+	@include currentWeather;
+	@include dailyHourlyForecast;
 }
