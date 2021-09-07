@@ -1,56 +1,43 @@
 @mixin startingPage {
 	&__startingPage {
+		@include columnFlex;
 		background-color: burlywood;
-		display: flex;
-		flex-direction: column;
 		padding: 20px;
 		min-height: 165px;
+		justify-content: space-between;
 		&__input {
+			@include borderStyle;
 			min-height: 30px;
 			text-align: center;
-			border-radius: 5px;
-			border: none;
-			margin-bottom: 5px;
 			font-size: 20px;
 		}
 		&__errorMsg {
-			margin-bottom: 5px;
 			font-size: 16px;
 			font-style: italic;
 			color: red;
 		}
 		&__fetchBtn {
-			margin: 0 auto 5px auto;
-			width: 30%;
-			border-radius: 5px;
-			border: none;
+			@include btnStyle;
+			margin: 0 auto;
 		}
-		&__tempUnitHeading {
-			margin-bottom: 5px;
-			height: 20px;
-		}
+		// &__tempUnitHeading {
+		// }
 		&__unitsBtns {
 			display: flex;
 			justify-content: space-around;
-			height: 20px;
 			&__btn {
-				width: 30%;
-				border-radius: 5px;
-				border: none;
+				@include btnStyle;
 			}
 		}
 		&__clearUnitBtn {
-			height: 45px;
 			button {
 				padding: 3px;
-				border-radius: 5px;
-				border: none;
+				@include borderStyle;
 			}
 		}
 
 		&__clearBtn {
-			border-radius: 5px;
-			border: none;
+			@include borderStyle;
 		}
 	}
 }

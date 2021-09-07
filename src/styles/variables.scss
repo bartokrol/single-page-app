@@ -1,0 +1,15 @@
+@mixin borderStyle {
+	border-radius: 5px;
+	border: none;
+}
+
+@mixin btnStyle {
+	@include borderStyle;
+	width: 30%;
+}
+
+@mixin columnFlex {
+	display: flex;
+	flex-direction: column;
+	// justify-content: ;
+}

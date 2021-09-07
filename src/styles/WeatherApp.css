@@ -10,7 +10,6 @@
 }
 
 .weatherApp__startingPage {
-  background-color: burlywood;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -18,35 +17,33 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  background-color: burlywood;
   padding: 20px;
+  min-height: 165px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .weatherApp__startingPage__input {
-  min-height: 30px;
-  text-align: center;
   border-radius: 5px;
   border: none;
-  margin-bottom: 5px;
+  min-height: 30px;
+  text-align: center;
   font-size: 20px;
 }
 
 .weatherApp__startingPage__errorMsg {
-  margin-bottom: 5px;
   font-size: 16px;
   font-style: italic;
   color: red;
 }
 
 .weatherApp__startingPage__fetchBtn {
-  margin: 0 auto 5px auto;
-  width: 30%;
   border-radius: 5px;
   border: none;
-}
-
-.weatherApp__startingPage__tempUnitHeading {
-  margin-bottom: 5px;
-  height: 20px;
+  width: 30%;
+  margin: 0 auto;
 }
 
 .weatherApp__startingPage__unitsBtns {
@@ -55,17 +52,12 @@
   display: flex;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  height: 20px;
 }
 
 .weatherApp__startingPage__unitsBtns__btn {
-  width: 30%;
   border-radius: 5px;
   border: none;
-}
-
-.weatherApp__startingPage__clearUnitBtn {
-  height: 45px;
+  width: 30%;
 }
 
 .weatherApp__startingPage__clearUnitBtn button {
