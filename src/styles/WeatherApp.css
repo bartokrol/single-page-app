@@ -32,14 +32,21 @@
 
 .weatherApp__startingPage__errorMsg {
   margin-bottom: 5px;
+  font-size: 16px;
+  font-style: italic;
+  color: red;
 }
 
 .weatherApp__startingPage__fetchBtn {
-  margin-bottom: 5px;
+  margin: 0 auto 5px auto;
+  width: 30%;
+  border-radius: 5px;
+  border: none;
 }
 
 .weatherApp__startingPage__tempUnitHeading {
   margin-bottom: 5px;
+  height: 20px;
 }
 
 .weatherApp__startingPage__unitsBtns {
@@ -48,6 +55,7 @@
   display: flex;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  height: 20px;
 }
 
 .weatherApp__startingPage__unitsBtns__btn {
@@ -57,13 +65,16 @@
 }
 
 .weatherApp__startingPage__clearUnitBtn {
-  width: 30%;
+  height: 45px;
+}
+
+.weatherApp__startingPage__clearUnitBtn button {
+  padding: 3px;
   border-radius: 5px;
   border: none;
 }
 
 .weatherApp__startingPage__clearBtn {
-  width: 30%;
   border-radius: 5px;
   border: none;
 }
