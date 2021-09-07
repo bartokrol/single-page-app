@@ -19,7 +19,7 @@
           flex-direction: column;
   background-color: burlywood;
   padding: 20px;
-  min-height: 165px;
+  min-height: 150px;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -66,9 +66,16 @@
   border: none;
 }
 
-.weatherApp__startingPage__clearBtn {
+.weatherApp__clearArea {
+  background-color: burlywood;
+  padding: 20px;
+}
+
+.weatherApp__clearArea__clearBtn {
   border-radius: 5px;
   border: none;
+  width: 30%;
+  width: 100%;
 }
 
 .weatherApp__nav {

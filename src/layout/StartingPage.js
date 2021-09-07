@@ -72,23 +72,25 @@ const StartingPage = ({
 	);
 
 	return (
-		<div>
+		<>
 			{startingPageVisibility ? (
 				<div className={`${className}`}>
 					{cityInputAndSubmitBtn}
 					{tempUnitBtns}
 				</div>
 			) : (
-				<Link to="/">
-					<button
-						className={`${className}__clearBtn`}
-						onClick={clickStartingPageVisibility}
-					>
-						Choose new city
-					</button>
-				</Link>
+				<div className={`${startingPageBasicClass}__clearArea`}>
+					<Link to="/">
+						<button
+							className={`${startingPageBasicClass}__clearArea__clearBtn`}
+							onClick={clickStartingPageVisibility}
+						>
+							Choose new city
+						</button>
+					</Link>
+				</div>
 			)}
-		</div>
+		</>
 	);
 };
 

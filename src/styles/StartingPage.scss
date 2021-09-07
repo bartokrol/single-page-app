@@ -3,7 +3,7 @@
 		@include columnFlex;
 		background-color: burlywood;
 		padding: 20px;
-		min-height: 165px;
+		min-height: 150px;
 		justify-content: space-between;
 		&__input {
 			@include borderStyle;
@@ -35,9 +35,13 @@
 				@include borderStyle;
 			}
 		}
-
+	}
+	&__clearArea {
+		background-color: burlywood;
+		padding: 20px;
 		&__clearBtn {
-			@include borderStyle;
+			@include btnStyle;
+			width: 100%;
 		}
 	}
 }
