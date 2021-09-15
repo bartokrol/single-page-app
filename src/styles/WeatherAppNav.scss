@@ -1,5 +1,24 @@
 @mixin weatherAppNav {
 	&__nav {
-		background-color: bisque;
+		&__listItem {
+			background-color: black;
+			transition: 0.3s;
+			list-style: none;
+			padding: 5px;
+			border-bottom: 1px solid white;
+			&:hover {
+				background-color: lightgrey;
+				transition: 0.3s;
+				a {
+					transition: 0.3s;
+				}
+			}
+			a {
+				text-decoration: none;
+				color: white;
+				text-transform: uppercase;
+				transition: 0.3s;
+			}
+		}
 	}
 }

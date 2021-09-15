@@ -1,10 +1,10 @@
-import "../styles/weatherApp.css";
 import { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import StartingPage from "../layout/StartingPage";
 import CurrentWeather from "../layout/CurrentWeather";
 import WeatherAppNav from "../layout/WeatherAppNav";
 import DailyHourlyForecast from "../layout/DailyHourlyForecast";
+import "../styles/WeatherApp.css";
 
 function App() {
 	const [city, setCity] = useState("");
