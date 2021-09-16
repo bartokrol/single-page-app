@@ -22,7 +22,7 @@ function App() {
 	const [forecastHours, setForecastHours] = useState(false);
 	const [forecastShow, setForecastShown] = useState(false);
 	const [forecastTemp, setForecastTemp] = useState(false);
-	const [daysWithHours, setDaysWithHours] = useState(false);
+	let [daysWithHours, setDaysWithHours] = useState(false);
 
 	const APIkey = "67fccf071e4c18dd1da570918ad48e4a";
 	const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}${tempUnit}&appid=${APIkey}`;
@@ -60,7 +60,6 @@ function App() {
 				.then((response) => response.json())
 				.then((data) => {
 					setForecast(data);
-					localStorage.setItem("forecast", JSON.stringify(data));
 				})
 				.catch((error) => console.log(error));
 		}
@@ -156,6 +155,9 @@ function App() {
 		setForecastDates(dates);
 		setForecastHours(hours);
 		setDaysWithHours(daysWithHours);
+		localStorage.setItem("forecastDates", JSON.stringify(dates));
+		localStorage.setItem("forecastHours", JSON.stringify(hours));
+		localStorage.setItem("daysWithHours", JSON.stringify(daysWithHours));
 	};
 	const handleInputChange = (e) => {
 		const city = e.target.value;
@@ -166,6 +168,11 @@ function App() {
 		const hourBtnValue = e.target.value;
 		const days = [];
 		const temps = [];
+
+		if (daysWithHours === false) {
+			let localDaysWithHours = JSON.parse(localStorage.daysWithHours);
+			daysWithHours = localDaysWithHours;
+		}
 
 		daysWithHours.forEach((day) =>
 			day.forEach((el) => {

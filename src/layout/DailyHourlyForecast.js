@@ -8,6 +8,11 @@ const HourlyForecast = ({
 	click,
 	dailyHourlyClassName,
 }) => {
+	if (forecastHours === false) {
+		let localForecastHours = JSON.parse(localStorage.forecastHours);
+		forecastHours = localForecastHours;
+	}
+
 	const className = `${dailyHourlyClassName}__forecast`;
 
 	const hours = forecastHours.map((forecast) => (
