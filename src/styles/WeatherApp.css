@@ -19,7 +19,7 @@
           flex-direction: column;
   background-color: burlywood;
   padding: 20px;
-  min-height: 150px;
+  min-height: 170px;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -43,6 +43,7 @@
   border-radius: 5px;
   border: none;
   width: 30%;
+  padding: 5px;
   margin: 0 auto;
 }
 
@@ -58,6 +59,7 @@
   border-radius: 5px;
   border: none;
   width: 30%;
+  padding: 5px;
 }
 
 .weatherApp__startingPage__clearUnitBtn button {
@@ -75,10 +77,39 @@
   border-radius: 5px;
   border: none;
   width: 30%;
+  padding: 5px;
   width: 100%;
 }
 
-.weatherApp__nav {
-  background-color: bisque;
+.weatherApp__nav__listItem {
+  background-color: black;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  list-style: none;
+  padding: 5px;
+  border-bottom: 1px solid white;
+}
+
+.weatherApp__nav__listItem:hover {
+  background-color: lightgrey;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.weatherApp__nav__listItem:hover a {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.weatherApp__nav__listItem a {
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.weatherApp__currentWeather {
+  padding: 5px;
 }
 /*# sourceMappingURL=WeatherApp.css.map */
