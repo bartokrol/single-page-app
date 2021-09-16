@@ -30,7 +30,6 @@ function App() {
 	const weatherAppClassName = "weatherApp";
 
 	const handleFetchClick = () => {
-		setWeather("");
 		isFetch = true;
 		setFetch(isFetch);
 
@@ -54,12 +53,14 @@ function App() {
 					setForecastShown(false);
 					setForecastTemp(false);
 					setDaysWithHours(false);
+					localStorage.setItem("weather", JSON.stringify(data));
 				})
 				.catch((error) => console.log(error));
 			fetch(forecastUrl)
 				.then((response) => response.json())
 				.then((data) => {
 					setForecast(data);
+					localStorage.setItem("forecast", JSON.stringify(data));
 				})
 				.catch((error) => console.log(error));
 		}
