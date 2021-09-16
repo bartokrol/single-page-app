@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import StartingPage from "../layout/StartingPage";
 import CurrentWeather from "../layout/CurrentWeather";
@@ -28,6 +28,12 @@ function App() {
 	const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}${tempUnit}&appid=${APIkey}`;
 	const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}${tempUnit}&appid=${APIkey}`;
 	const weatherAppClassName = "weatherApp";
+
+	useEffect(() => {
+		if (localStorage.weather) {
+			setStartingPageVisibility(false);
+		}
+	}, []);
 
 	const handleFetchClick = () => {
 		isFetch = true;
@@ -213,6 +219,7 @@ function App() {
 		setStartingPageVisibility(true);
 		setNavigationVisibility(false);
 		setTempUnitForWeatherChosen(false);
+		localStorage.clear();
 	};
 
 	return (
