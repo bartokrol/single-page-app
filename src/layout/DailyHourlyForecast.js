@@ -13,6 +13,11 @@ const HourlyForecast = ({
 		forecastHours = localForecastHours;
 	}
 
+	if (forecastDates === false) {
+		let localForecastDates = JSON.parse(localStorage.forecastDates);
+		forecastDates = localForecastDates;
+	}
+
 	const className = `${dailyHourlyClassName}__forecast`;
 
 	const hours = forecastHours.map((forecast) => (
