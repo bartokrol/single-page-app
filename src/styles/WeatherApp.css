@@ -110,6 +110,11 @@
 }
 
 .weatherApp__currentWeather {
+  background-color: lightblue;
   padding: 5px;
+}
+
+.weatherApp__currentWeather__cityName {
+  margin-bottom: 5px;
 }
 /*# sourceMappingURL=WeatherApp.css.map */

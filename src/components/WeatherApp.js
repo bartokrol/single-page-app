@@ -232,6 +232,7 @@ function App() {
 								{...props}
 								weather={weather}
 								weatherAppNavClassName={`${weatherAppClassName}`}
+								tempUnit={tempUnit}
 							/>
 						)}
 					></Route>

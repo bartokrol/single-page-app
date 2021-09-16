@@ -1,5 +1,15 @@
 @mixin currentWeather {
 	&__currentWeather {
+		background-color: lightblue;
 		padding: 5px;
+		&__cityName {
+			margin-bottom: 5px;
+		}
+		&__weatherDesc {
+		}
+		&__temp {
+		}
+		&__weatherImg {
+		}
 	}
 }
