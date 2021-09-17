@@ -17,7 +17,7 @@ function App() {
 	const [navigationVisibility, setNavigationVisibility] = useState(false);
 	let [isFetch, setFetch] = useState(false);
 	const [weather, setWeather] = useState(false);
-	const [forecast, setForecast] = useState(false);
+	let [forecast, setForecast] = useState(false);
 	const [forecastDates, setForecastDates] = useState(false);
 	const [forecastHours, setForecastHours] = useState(false);
 	const [forecastShow, setForecastShown] = useState(false);
@@ -32,6 +32,7 @@ function App() {
 	useEffect(() => {
 		if (localStorage.weather) {
 			setStartingPageVisibility(false);
+			setNavigationVisibility(true);
 		}
 	}, []);
 
@@ -66,6 +67,7 @@ function App() {
 				.then((response) => response.json())
 				.then((data) => {
 					setForecast(data);
+					localStorage.setItem("forecast", JSON.stringify(data));
 				})
 				.catch((error) => console.log(error));
 		}
@@ -96,6 +98,10 @@ function App() {
 		const hours = [];
 		const days = [];
 		const daysWithHours = [];
+		if (forecast === false) {
+			let localForecast = JSON.parse(localStorage.forecast);
+			forecast = localForecast;
+		}
 		forecast.list.forEach((el) => {
 			const lastDate = forecast.list[
 				forecast.list.length - 1
@@ -204,17 +210,18 @@ function App() {
 		setTempUnitForWeatherChosen(false);
 	};
 
-	const forecastNav =
-		typeof weather.main != "undefined" ? (
-			<>
-				<WeatherAppNav
-					weatherAppNavClassName={`${weatherAppClassName}`}
-					click={showForecast}
-				/>
-			</>
-		) : (
-			" "
-		);
+	const forecastNav = (
+		// typeof weather.main != "undefined" ? (
+		<>
+			<WeatherAppNav
+				weatherAppNavClassName={`${weatherAppClassName}`}
+				click={showForecast}
+			/>
+		</>
+	);
+	// ) : (
+	// 	" "
+	// );
 	const handleStartingPageVisibility = () => {
 		setStartingPageVisibility(true);
 		setNavigationVisibility(false);
